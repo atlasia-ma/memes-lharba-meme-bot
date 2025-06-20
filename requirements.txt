@@ -1,0 +1,6 @@
+discord.py
+pandas
+python-dotenv
+sentence_transformers
+chromadb
+huggingface_hub

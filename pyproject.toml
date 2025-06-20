@@ -1,0 +1,18 @@
+[project]
+name = "memebot"
+version = "0.1.0"
+description = "A Discord bot for finding relevant memes."
+authors = [{ name = "Nouamane Tazi" }, { name = "Abdellah Kadem" }]
+dependencies = [
+    "discord.py",
+    "pandas",
+    "python-dotenv",
+    "sentence_transformers",
+    "chromadb",
+    "huggingface_hub",
+]
+
+[tool.setuptools]
+packages = [
+    "memebot",
+] # Assuming your main script and agent are in a 'memebot' directory
