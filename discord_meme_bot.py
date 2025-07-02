@@ -1,7 +1,7 @@
 import os
 import discord
 from discord.ext import commands
-from meme_agent import MemeFinder
+from gradiomeme_agent_api import GradioMemeAgent
 import asyncio
 from dotenv import load_dotenv
 
@@ -16,10 +16,10 @@ hf_token = os.getenv('HF_TOKEN', "")
 intents = discord.Intents.all()  # Use all intents to ensure we can detect commands
 bot = commands.Bot(command_prefix='!', intents=intents)
 
-# Initialize MemeFinder with Hugging Face token
-print("Setting up Hugging Face Inference Client...")
-meme_finder = MemeFinder(use_llm=True, hf_token=hf_token)
-print("Hugging Face Inference Client ready!")
+# Initialize GradioMemeAgent
+print("Setting up Gradio Meme Agent...")
+meme_finder = GradioMemeAgent()
+print("Gradio Meme Agent ready!")
 
 
 @bot.event

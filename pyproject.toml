@@ -6,13 +6,15 @@ authors = [{ name = "Nouamane Tazi" }, { name = "Abdellah Kadem" }]
 dependencies = [
     "discord.py",
     "pandas",
+    "numpy",
     "python-dotenv",
     "sentence_transformers",
     "chromadb",
     "huggingface_hub",
+    "gradio_client",
 ]
+requires-python = ">=3.8"
 
-[tool.setuptools]
-packages = [
-    "memebot",
-] # Assuming your main script and agent are in a 'memebot' directory
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
