@@ -91,7 +91,7 @@ python discord_meme_bot.py
 
 #### 1. SSH Access
 ```bash
-ssh -i /home/nyanpasu/.ssh/platform_vm.pem ubuntu@ec2-13-38-156-22.eu-west-3.compute.amazonaws.com
+ssh -i /home/nyanpasu/.ssh/key.pem ubuntu@server.tld
 ```
 
 #### 2. Stop Previous Bot Process
