@@ -4,7 +4,6 @@ from discord.ext import commands
 from gradiomeme_agent_api import GradioMemeAgent
 import asyncio
 from dotenv import load_dotenv
-import re
 
 # Load environment variables
 load_dotenv()
@@ -30,10 +29,9 @@ async def on_ready():
     for guild in bot.guilds:
         print(f'- {guild.name} (id: {guild.id})')
         # Print bot's permissions in this guild
-        if bot.user:
-            bot_member = guild.get_member(bot.user.id)
-            if bot_member:
-                print(f'  Permissions: {bot_member.guild_permissions}')
+        bot_member = guild.get_member(bot.user.id)
+        if bot_member:
+            print(f'  Permissions: {bot_member.guild_permissions}')
 
     # Print all registered commands
     print("Registered commands:")
@@ -84,34 +82,12 @@ async def get_meme(ctx, *, text=None):
 
         # Get meme using MemeFinder
         result = meme_finder.find_relevant_meme(text)
-        # Handle Gradio tuple response
-        if result and isinstance(result, (list, tuple)) and len(result) >= 2:
-            html_content, description = result[0], result[1]
 
-            # Extract URL from iframe in the HTML content
-            match = re.search(r'src="([^"]+)"', str(html_content))
-            if match:
-                meme_url = match.group(1)
+        # Debug the result
+        print(f"Debug - Meme result: {result}")
 
-                # Clean up Google Drive URL for better embedding
-                if 'drive.google.com' in meme_url and '/preview' in meme_url:
-                    meme_url = meme_url.replace('/preview', '')
-                    meme_url = meme_url.replace('file/d/', 'file/view?id=')
-                    meme_url = meme_url.replace('&export=download', '')
-                    meme_url = re.sub(r'&authuser=\d+', '', meme_url)
-                embed = discord.Embed(
-                    title="Meme",
-                    type="video",
-                    color=discord.Color.blue()
-                )
-
-                await ctx.send(f"{description}\n{meme_url}", embed=embed)
-                print(f"Meme URL and description sent: {meme_url}")
-            else:
-                await ctx.send("Sorry, I couldn't extract the meme from the result.")
-
-        # Check if we have a valid result with a filename (fallback)
-        elif result and isinstance(result, dict):
+        # Check if we have a valid result with a filename
+        if result and isinstance(result, dict):
             # Get the meme path - handle both 'meme_path' and 'filename' keys
             meme_path = None
             if 'meme_path' in result:
