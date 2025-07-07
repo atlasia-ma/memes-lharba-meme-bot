@@ -1,10 +1,12 @@
 from gradio_client import Client
+import os
+from dotenv import load_dotenv
 
 
 class GradioMemeAgent:
-    def __init__(self):
+    def __init__(self, hf_token=None):
         """Initialize the Gradio client for meme finding."""
-        self.client = Client("atlasia/moul_lmemes")
+        self.client = Client("atlasia/moul_lmemes", hf_token=hf_token)
     
     def find_relevant_meme(self, user_input):
         """
@@ -28,6 +30,8 @@ class GradioMemeAgent:
             return None 
 
 if __name__ == "__main__":
-    agent = GradioMemeAgent()
+    load_dotenv()
+    hf_token = os.getenv("HF_TOKEN")
+    agent = GradioMemeAgent(hf_token=hf_token)
     result = agent.find_relevant_meme("a man running")
     print(result)

@@ -19,7 +19,7 @@ bot = commands.Bot(command_prefix='!', intents=intents)
 
 # Initialize GradioMemeAgent
 print("Setting up Gradio Meme Agent...")
-meme_finder = GradioMemeAgent()
+meme_finder = GradioMemeAgent(hf_token=hf_token)
 print("Gradio Meme Agent ready!")
 
 
