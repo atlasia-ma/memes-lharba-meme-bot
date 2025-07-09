@@ -101,13 +101,14 @@ async def get_meme(ctx, *, text=None):
                     meme_url = re.sub(r'&authuser=\d+', '', meme_url)
                 elif 'youtube.com/embed/' in meme_url:
                     meme_url = meme_url.replace('/embed/', '/watch?v=')
+
                 embed = discord.Embed(
                     title="Meme",
                     type="video",
                     color=discord.Color.blue()
                 )
 
-                await ctx.send(f"{description}\n{meme_url}", embed=embed)
+                await ctx.send(f"{description}\n{meme_url}")
                 print(f"Meme URL and description sent: {meme_url}")
             else:
                 await ctx.send("Sorry, I couldn't extract the meme from the result.")
