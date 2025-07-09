@@ -99,6 +99,8 @@ async def get_meme(ctx, *, text=None):
                     meme_url = meme_url.replace('file/d/', 'file/view?id=')
                     meme_url = meme_url.replace('&export=download', '')
                     meme_url = re.sub(r'&authuser=\d+', '', meme_url)
+                elif 'youtube.com/embed/' in meme_url:
+                    meme_url = meme_url.replace('/embed/', '/watch?v=')
                 embed = discord.Embed(
                     title="Meme",
                     type="video",
